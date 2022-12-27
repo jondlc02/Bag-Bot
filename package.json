@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4"
+  },
+  "name": "bagbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jondlc02/Bag-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jondlc02/Bag-Bot/issues"
+  },
+  "homepage": "https://github.com/jondlc02/Bag-Bot#readme",
+  "description": ""
+}
