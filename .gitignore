@@ -1,5 +1,5 @@
 config.json
 node_modules
-addtag.js
 edittag.js
+tag.js
 database.sqlite
