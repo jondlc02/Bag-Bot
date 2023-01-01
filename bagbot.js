@@ -85,21 +85,6 @@ client.on(Events.InteractionCreate, async interaction =>
         console.error(`Error executing ${interaction.commandName}`);
 		console.error(error);
     }
-
-   
-    /*//Command for deleting tags
-    else if (command === 'deletetag')
-    {
-        const tagName = interaction.options.getString('name');
-
-        const rowCount = await Tags.destroy({where: {name: tagName}});
-
-        if (rowCount)
-        {
-            return interaction.reply(`Tag deleted.`)
-        }
-        return interaction.reply(`No tag found with name ${tagName}`);
-    }*/
 });
 
 client.login(token);
