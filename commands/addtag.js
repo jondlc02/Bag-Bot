@@ -30,8 +30,8 @@ module.exports = {
         const tagName = interaction.options.getString('name');
         const tagDescription = interaction.options.getString('description');
 
-        await interaction.deferReply();
-
+        await interaction.deferReply({ephemeral: true});
+        
         try 
         {
             const tag = await Tags.create(
@@ -41,13 +41,13 @@ module.exports = {
                 username: interaction.user.username
             });
 
-            await interaction.editReply(`Tag ${tag.name} added.`)
+            await interaction.editReply(`"${tag.name}" was added to the database.`)
         }
         catch (error)
         {
             if (error.name === 'SequelizeUniqueConstraintError')
             {
-                await interaction.editReply(`Tag: ${tagName} already exists.`);
+                await interaction.editReply(`A tag with the name "${tagName}" already exists.`);
             }
             else
             {
