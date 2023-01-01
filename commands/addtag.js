@@ -1,14 +1,5 @@
 const {SlashCommandBuilder} = require('discord.js');
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-	host: 'localhost',
-	dialect: 'sqlite',
-	logging: false,
-	storage: 'database.sqlite',
-});
-
-const Tags = require('./../models/tags.js')(sequelize, Sequelize.DataTypes);
+const {Tags} = require('./../dbObjects.js');
 
 // Adds tag into the database
 module.exports = {
@@ -31,7 +22,7 @@ module.exports = {
         const tagDescription = interaction.options.getString('description');
 
         await interaction.deferReply({ephemeral: true});
-        
+
         try 
         {
             const tag = await Tags.create(
