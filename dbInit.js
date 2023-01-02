@@ -10,17 +10,12 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 const Categories = require('./models/category.js')(sequelize, Sequelize.DataTypes);
 require('./models/tags.js')(sequelize, Sequelize.DataTypes);
 require('./models/item.js')(sequelize, Sequelize.DataTypes);
-require('./models/weapon.js')(sequelize, Sequelize.DataTypes);
-require('./models/armor.js')(sequelize, Sequelize.DataTypes);
-require('./models/consumable.js')(sequelize, Sequelize.DataTypes);
-require('./models/keyitem.js')(sequelize, Sequelize.DataTypes);
-require('./models/misc.js')(sequelize, Sequelize.DataTypes);
 require('./models/player.js')(sequelize, Sequelize.DataTypes);
 require('./models/player_inv.js')(sequelize, Sequelize.DataTypes);
 
-//const force = process.argv.includes('--force') || process.argv.includes('-f');
+const force = process.argv.includes('--force') || process.argv.includes('-f');
 
-sequelize.sync().then(async () => 
+sequelize.sync({ force }).then(async () => 
 {
 	const types =
 	[
