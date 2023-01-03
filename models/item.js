@@ -5,10 +5,15 @@ module.exports = (sequelize,  DataTypes) =>
         name: 
         { // Specifies that the name part of the weapon is a string/text and that each name
             type: DataTypes.TEXT, // Must be unique to be entered into the database
-            unique: true,
+            unique: true
 	    },
 	    description: DataTypes.TEXT, // Tags also have descriptions which must be string/text
-        category_ID: DataTypes.INTEGER,
-	    owner: DataTypes.TEXT // Tags include usernames
+        weight:
+        {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0
+        },
+        category: DataTypes.TEXT,
     }, {timestamps: false});
 };
