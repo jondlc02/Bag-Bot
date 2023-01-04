@@ -7,28 +7,30 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
-const Tags = require('./models/tags.js')(sequelize, Sequelize.DataTypes);
 const Items = require('./models/item.js')(sequelize, Sequelize.DataTypes);
 const Players = require('./models/player.js')(sequelize, Sequelize.DataTypes);
 const Players_Inv = require('./models/player_inv.js')(sequelize, Sequelize.DataTypes);
 
 Players_Inv.belongsTo(Items, { foreignKey: 'item_id', as: 'item'});
 
-Reflect.defineProperty(Players.prototype, 'addItem', {
-	value: async item => {
-		const playerItem = await Players_Inv.findOne({
-			where: { player_id: this.player_id, item_id: item.id },
-		});
+/*Reflect.defineProperty(Players.prototype, 'addItem', {
+	value: async item =>
+    {
+        console.log(this.cur_weight);
+        console.log(this.player_id);
+        const playerItem = await Players_Inv.findOne({where: {player_id: this.player_id, item_id: item.id }});
+        this.cur_weight += item.weight;
+        this.save();
 
-		if (playerItem) 
+		if (playerItem)     
         {
-			playerItem.amount += 1;
+			playerItem.quantity += 1;
 			return playerItem.save();
 		}
 
 		return Players_Inv.create({ player_id: this.player_id, item_id: item.id});
-	},
-});
+	}
+});*/ // This does not work, this keyword returns undefined
 
 
 module.exports = {Tags, Items, Players, Players_Inv};
