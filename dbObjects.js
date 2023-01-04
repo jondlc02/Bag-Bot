@@ -17,7 +17,7 @@ Players_Inv.belongsTo(Items, { foreignKey: 'item_id', as: 'item'});
 Reflect.defineProperty(Players.prototype, 'addItem', {
 	value: async item => {
 		const playerItem = await Players_Inv.findOne({
-			where: { user_id: this.user_id, item_id: item.id },
+			where: { player_id: this.player_id, item_id: item.id },
 		});
 
 		if (playerItem) 
@@ -26,7 +26,7 @@ Reflect.defineProperty(Players.prototype, 'addItem', {
 			return playerItem.save();
 		}
 
-		return UserItems.create({ user_id: this.user_id, item_id: item.id});
+		return Players_Inv.create({ player_id: this.player_id, item_id: item.id});
 	},
 });
 

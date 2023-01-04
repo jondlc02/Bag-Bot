@@ -5,7 +5,8 @@ module.exports = (sequelize,  DataTypes) =>
         player_id: 
         {
             type: DataTypes.STRING,
-            primary_key: true,
+            unique: true,
+            primary_key: true
 	    },
 	    gold:
         {
