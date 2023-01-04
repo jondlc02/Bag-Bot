@@ -33,4 +33,4 @@ Players_Inv.belongsTo(Items, { foreignKey: 'item_id', as: 'item'});
 });*/ // This does not work, this keyword returns undefined
 
 
-module.exports = {Tags, Items, Players, Players_Inv};
+module.exports = {Items, Players, Players_Inv};
