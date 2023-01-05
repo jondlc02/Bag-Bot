@@ -11,7 +11,8 @@ const Items = require('./models/item.js')(sequelize, Sequelize.DataTypes);
 const Players = require('./models/player.js')(sequelize, Sequelize.DataTypes);
 const Players_Inv = require('./models/player_inv.js')(sequelize, Sequelize.DataTypes);
 
-Players_Inv.belongsTo(Items, { foreignKey: 'item_id', as: 'item'});
+//Items.hasOne(Players_Inv);
+Players_Inv.belongsTo(Items, {foreignKey: 'item_id', as: 'item'});
 
 /*Reflect.defineProperty(Players.prototype, 'addItem', {
 	value: async item =>

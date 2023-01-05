@@ -74,9 +74,9 @@ module.exports = {
         person.cur_weight += item.weight * itemNum;
         person.save();
 
-        if (itemNum === 0)
+        if (itemNum === 1)
         {
-            await interaction.editReply(`A ${item.name} was successfully given to ${player.username}.`);
+            await interaction.editReply(`A(n) ${item.name} was successfully given to ${player.username}.`);
             return;
         }
         await interaction.editReply(`${itemNum} ${item.name}s were successfully given to ${player.username}.`);

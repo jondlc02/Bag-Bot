@@ -5,7 +5,7 @@ const {Players_Inv, Players, Items} = require('./../dbObjects.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('giveitem')
-        .setDescription('Give an item from your inventory to a fellow player or an NPC. The selected player will receive a DM with the item name and amount.')
+        .setDescription('Give an item from your inventory to a fellow player or NPC.')
         .addStringOption(option =>
             option
                 .setName('name')
