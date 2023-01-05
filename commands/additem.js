@@ -60,6 +60,9 @@ module.exports = {
             return;
         }
 
+        console.log(`test`);
+        await person.testMethod(item);
+
         const playerItem = await Players_Inv.findOne({where: {player_id: player.id, item_id: item.id}})
         if (playerItem)
         {

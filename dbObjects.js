@@ -14,10 +14,18 @@ const Players_Inv = require('./models/player_inv.js')(sequelize, Sequelize.DataT
 //Items.hasOne(Players_Inv);
 Players_Inv.belongsTo(Items, {foreignKey: 'item_id', as: 'item'});
 
-/*Reflect.defineProperty(Players.prototype, 'addItem', {
+// This will become the add item method
+Players.prototype.testMethod = async function(item)
+{
+	console.log(this.player_id);
+	await console.log(item.name);
+};
+
+Reflect.defineProperty(Players.prototype, 'addItem', {
 	value: async item =>
     {
-        console.log(this.cur_weight);
+		await console.log(this.player_id);
+        /*console.log(this.cur_weight);
         console.log(this.player_id);
         const playerItem = await Players_Inv.findOne({where: {player_id: this.player_id, item_id: item.id }});
         this.cur_weight += item.weight;
@@ -29,9 +37,10 @@ Players_Inv.belongsTo(Items, {foreignKey: 'item_id', as: 'item'});
 			return playerItem.save();
 		}
 
-		return Players_Inv.create({ player_id: this.player_id, item_id: item.id});
+		return Players_Inv.create({ player_id: this.player_id, item_id: item.id});*/
+		return true;
 	}
-});*/ // This does not work, this keyword returns undefined
+}); // This does not work, this keyword returns undefined
 
 
 module.exports = {Items, Players, Players_Inv};

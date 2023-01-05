@@ -84,5 +84,7 @@ module.exports = {
         givingPlayer.cur_weight -= item.weight * itemNum;
         receivingPlayer.save();
         givingPlayer.save();
+        await interaction.users.send(receiver.id, `You have been given ${itemNum} ${item.name}(s) by ${interaction.user.username}`);
+        await interaction.editReply(`Successfully sent item(s)!`)
     },
 };

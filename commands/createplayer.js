@@ -1,7 +1,8 @@
 const {SlashCommandBuilder} = require('discord.js');
 const {Players} = require('./../dbObjects.js');
 
-// Adds tag into the database
+// Command for adding a new player into the database.
+// Players add themselves into the database
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('createplayer')

@@ -1,11 +1,12 @@
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder, Collection} = require('discord.js');
 const {Items} = require('./../dbObjects.js');
+const {DMRoleID} = require('./../config.json');
 
-// Adds tag into the database
+// DM command for creating new items for the itemlist
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('createitem')
-        .setDescription('Creates a new item in the database.')
+        .setDescription('(DM only) Creates a new item in the database.')
         .addStringOption(option =>
             option
                 .setName('name')
@@ -35,6 +36,12 @@ module.exports = {
                 )),
     async execute(interaction)
     {
+        if (!interaction.member.roles.cache.has(DMRoleID))
+        {
+            console.log(`User does not have proper permission`);
+            await interaction.editReply(`Only the DM has access to this command!`);
+            return;
+        }
         const itemName = interaction.options.getString('name');
         const itemDescription = interaction.options.getString('description');
         const itemWeight = interaction.options.getInteger('weight');
