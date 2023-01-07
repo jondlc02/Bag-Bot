@@ -1,4 +1,8 @@
 # Bag-Bot
+
+This is not what bag-bot intended to be. Please navigate to the main branch or the dev branch in order to have all the intended features.
+This branch includes only code for creating, accessing, and deleting tags as displayed in the discord.js guide/documentation.
+
 Needs the node_modules folders and all the dependencies that come with it.
 First, in the terminal of your javascript IDE of choice (I use VSCode) do the following commands:
 npm i discord.js
