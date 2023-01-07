@@ -60,22 +60,7 @@ module.exports = {
             return;
         }
 
-        console.log(`test`);
-        await person.testMethod(item);
-
-        const playerItem = await Players_Inv.findOne({where: {player_id: player.id, item_id: item.id}})
-        if (playerItem)
-        {
-            playerItem.quantity += itemNum;
-            playerItem.save();
-        }
-        else
-        {
-            Players_Inv.create({player_id: player.id, item_id: item.id, quantity: itemNum});
-        }
-
-        person.cur_weight += item.weight * itemNum;
-        person.save();
+        await person.addItem(item, itemNum);
 
         if (itemNum === 1)
         {

@@ -1,5 +1,6 @@
 const {SlashCommandBuilder, CommandInteractionOptionResolver} = require('discord.js');
 const {Players_Inv, Players, Items} = require('./../dbObjects.js');
+const {Op} = require('sequelize');
 
 // Adds tag into the database
 module.exports = {
@@ -27,7 +28,7 @@ module.exports = {
         const giver = await interaction.user.id;
         const itemName = await interaction.options.getString('name');
         const receiver = await interaction.options.getUser('player');
-        itemNum = await interaction.options.getInteger('amount') || 1;;
+        var itemNum = await interaction.options.getInteger('amount') || 1;
 
         const givingPlayer = await Players.findOne({where: {player_id: giver.id}});
         const receivingPlayer = await Players.findOne({where: {player_id: receiver.id}});
@@ -51,39 +52,16 @@ module.exports = {
             return;
         }
 
-        const playerItem = await Players_Inv.findOne({where: {player_id: givingPlayer.id, item_id: item.id}})
+        const playerItem = await Players_Inv.findOne({where: {player_id: givingPlayer.id, item_id: item.id}});
         if (!playerItem)
         {
             await interaction.editReply(`You do not have a(n) ${item.name} in your inventory.`);
             return;
         }
 
-        if (playerItem.quantity < itemNum)
-        {
-            itemNum = playerItem.quantity;
-            await Players_Inv.destroy({where: {player_id: givingPlayer.id, item_id: item.id}});
-        }
-        else
-        {
-            playerItem.quantity -= itemNum;
-            playerItem.save();
-        }
-        
-        const receivingItem = await Players_Inv.findOne({where: {player_id: receivingPlayer.id, item_id: item.id}})
-        if (receivingItem)
-        {
-            receivingItem.quantity += itemNum;
-            receivingItem.save();
-        }
-        else
-        {
-            Players_Inv.create({player_id: receivingPlayer.id, item_id: item.id, quantity: itemNum});
-        }
+        givingPlayer.removeItem(item, playerItem, itemNum);        
+        receivingPlayer.addItem(item);
 
-        receivingPlayer.cur_weight += item.weight * itemNum;
-        givingPlayer.cur_weight -= item.weight * itemNum;
-        receivingPlayer.save();
-        givingPlayer.save();
         await interaction.users.send(receiver.id, `You have been given ${itemNum} ${item.name}(s) by ${interaction.user.username}`);
         await interaction.editReply(`Successfully sent item(s)!`)
     },
