@@ -7,6 +7,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	storage: 'database.sqlite',
 });
 
+require('./models/item_rec.js')(sequelize, Sequelize.DataTypes);
 require('./models/item.js')(sequelize, Sequelize.DataTypes);
 require('./models/player.js')(sequelize, Sequelize.DataTypes);
 require('./models/player_inv.js')(sequelize, Sequelize.DataTypes);

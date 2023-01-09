@@ -8,6 +8,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 });
 
 const Items = require('./models/item.js')(sequelize, Sequelize.DataTypes);
+const Rec_Items = require('./models/item_rec.js')(sequelize, Sequelize.DataTypes);
 const Players = require('./models/player.js')(sequelize, Sequelize.DataTypes);
 const Players_Inv = require('./models/player_inv.js')(sequelize, Sequelize.DataTypes);
 
@@ -73,4 +74,4 @@ Players.prototype.removeItem = async function(playerItem, item, itemNum)
 }); // This does not work, this keyword returns undefined*/
 
 
-module.exports = {Items, Players, Players_Inv};
+module.exports = {Items, Rec_Items, Players, Players_Inv};

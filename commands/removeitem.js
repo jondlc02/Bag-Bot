@@ -25,6 +25,13 @@ module.exports = {
     {
         await interaction.deferReply({ephemeral: true});
 
+        if (!interaction.member.roles.cache.has(DMRoleID))
+        {
+            console.log(`User does not have proper permission`);
+            await interaction.editReply(`Only the DM has access to this command!`);
+            return;
+        }
+
         const itemName = interaction.options.getString('name');
         const player = interaction.options.getUser('player');
         var itemNum = interaction.options.getInteger('amount') || 1;
