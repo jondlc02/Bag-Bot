@@ -15,5 +15,6 @@ module.exports = (sequelize,  DataTypes) =>
             defaultValue: 0
         },
         category: DataTypes.TEXT,
+        creator_user: DataTypes.TEXT
     }, {timestamps: false});
 };

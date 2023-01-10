@@ -19,7 +19,7 @@ module.exports = {
         .addIntegerOption(option => 
             option 
                 .setName('weight')
-                .setDescription('Set the weight for the item.')
+                .setDescription('Set the weight for the item (lbs).')
                 .setRequired(true))    
         .addStringOption(option =>
             option
@@ -35,18 +35,12 @@ module.exports = {
                 )),
     async execute(interaction)
     {
-        if (!interaction.member.roles.cache.has(DMRoleID))
-        {
-            console.log(`User does not have proper permission`);
-            await interaction.editReply(`Only the DM has access to this command!`);
-            return;
-        }
+        await interaction.deferReply({ephemeral: true});
+
         const itemName = interaction.options.getString('name');
         const itemDescription = interaction.options.getString('description');
         const itemWeight = interaction.options.getInteger('weight');
         const itemCategory = interaction.options.getString('category');
-
-        await interaction.deferReply({ephemeral: true});
 
         try 
         {
@@ -55,7 +49,8 @@ module.exports = {
                 name: itemName,
                 description: itemDescription,
                 weight: itemWeight,
-                category: itemCategory
+                category: itemCategory,
+                creator_user: interaction.user.username
             });
 
             await interaction.editReply(`"${item.name}" was added to the list of player-made items!`)

@@ -20,7 +20,7 @@ module.exports = {
         .addIntegerOption(option => 
             option 
                 .setName('weight')
-                .setDescription('Set the weight for the item.')
+                .setDescription('Set the weight for the item (lbs).')
                 .setRequired(true))    
         .addStringOption(option =>
             option
